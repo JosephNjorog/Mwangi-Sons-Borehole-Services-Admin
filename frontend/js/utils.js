@@ -1,57 +1,139 @@
-// Example function to populate the clients report table
-function populateClientsReport(data) {
-    const table = document.getElementById("clientsReportTable");
-    table.innerHTML = data.map(client => `
-        <tr>
-            <td>${client.id}</td>
-            <td>${client.name}</td>
-            <td>${client.contact}</td>
-            <td>${client.location}</td>
-            <td>${client.dateRegistered}</td>
-        </tr>
-    `).join('');
-}
+// API endpoints
+const API_BASE_URL = 'http://localhost:3000/api';
 
-// Example function to populate the services report table
-function populateServicesReport(data) {
-    const table = document.getElementById("servicesReportTable");
-    table.innerHTML = data.map(service => `
-        <tr>
-            <td>${service.id}</td>
-            <td>${service.name}</td>
-            <td>${service.clientName}</td>
-            <td>${service.startDate}</td>
-            <td>${service.endDate}</td>
-            <td>${service.status}</td>
-        </tr>
-    `).join('');
-}
+// Utility functions for API calls
+const api = {
+    async get(endpoint) {
+        try {
+            const response = await fetch(`${API_BASE_URL}${endpoint}`);
+            if (!response.ok) throw new Error('Network response was not ok');
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            throw error;
+        }
+    },
 
-// Example function to populate the revenue report table
-function populateRevenueReport(data) {
-    const table = document.getElementById("revenueReportTable");
-    table.innerHTML = data.map(revenue => `
-        <tr>
-            <td>${revenue.transactionId}</td>
-            <td>${revenue.clientName}</td>
-            <td>${revenue.serviceProvided}</td>
-            <td>${revenue.amount}</td>
-            <td>${revenue.date}</td>
-        </tr>
-    `).join('');
-}
+    async post(endpoint, data) {
+        try {
+            const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+            if (!response.ok) throw new Error('Network response was not ok');
+            return await response.json();
+        } catch (error) {
+            console.error('Error posting data:', error);
+            throw error;
+        }
+    },
 
-// Example function to populate the projects report table
-function populateProjectsReport(data) {
-    const table = document.getElementById("projectsReportTable");
-    table.innerHTML = data.map(project => `
-        <tr>
-            <td>${project.projectId}</td>
-            <td>${project.projectName}</td>
-            <td>${project.clientName}</td>
-            <td>${project.startDate}</td>
-            <td>${project.endDate}</td>
-            <td>${project.status}</td>
-        </tr>
-    `).join('');
-}
+    async put(endpoint, data) {
+        try {
+            const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+            if (!response.ok) throw new Error('Network response was not ok');
+            return await response.json();
+        } catch (error) {
+            console.error('Error updating data:', error);
+            throw error;
+        }
+    },
+
+    async delete(endpoint) {
+        try {
+            const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+                method: 'DELETE',
+            });
+            if (!response.ok) throw new Error('Network response was not ok');
+            return await response.json();
+        } catch (error) {
+            console.error('Error deleting data:', error);
+            throw error;
+        }
+    }
+};
+
+// Form validation functions
+const validation = {
+    isEmailValid(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    },
+
+    isPhoneValid(phone) {
+        const phoneRegex = /^\+?[1-9]\d{1,14}$/;
+        return phoneRegex.test(phone);
+    },
+
+    isRequired(value) {
+        return value !== null && value !== undefined && value.trim() !== '';
+    },
+
+    isNumber(value) {
+        return !isNaN(value) && isFinite(value);
+    },
+
+    validateForm(formData, rules) {
+        const errors = {};
+        Object.keys(rules).forEach(field => {
+            const value = formData[field];
+            const fieldRules = rules[field];
+
+            if (fieldRules.required && !this.isRequired(value)) {
+                errors[field] = 'This field is required';
+            } else if (fieldRules.email && !this.isEmailValid(value)) {
+                errors[field] = 'Invalid email format';
+            } else if (fieldRules.phone && !this.isPhoneValid(value)) {
+                errors[field] = 'Invalid phone number';
+            } else if (fieldRules.number && !this.isNumber(value)) {
+                errors[field] = 'Must be a valid number';
+            }
+        });
+        return errors;
+    }
+};
+
+// Currency formatting
+const formatCurrency = (amount) => {
+    return `KES ${parseFloat(amount).toLocaleString('en-KE', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    })}`;
+};
+
+// Date formatting
+const formatDate = (date) => {
+    return new Date(date).toLocaleDateString('en-KE', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+};
+
+// Load components
+const loadComponent = async (containerId, componentPath) => {
+    try {
+        const response = await fetch(componentPath);
+        const html = await response.text();
+        document.getElementById(containerId).innerHTML = html;
+    } catch (error) {
+        console.error(`Error loading component ${componentPath}:`, error);
+    }
+};
+
+// Show notification
+const showNotification = (message, type = 'success') => {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+    
+    document.body.appendChild(
