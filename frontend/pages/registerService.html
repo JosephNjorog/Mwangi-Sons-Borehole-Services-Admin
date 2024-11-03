@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Registration - Uzima Borehole Drilling</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="wrapper">
+        <div id="header-container"></div>
+        
+        <div class="main-content">
+            <div id="sidebar-container"></div>
+            
+            <div class="content-area">
+                <div class="form-container">
+                    <h2>Service Registration</h2>
+                    <form id="serviceRegistrationForm">
+                        <div class="form-group">
+                            <label for="clientId">Select Client</label>
+                            <select id="clientId" name="clientId" required>
+                                <option value="">Select Client</option>
+                                <!-- Will be populated dynamically -->
+                            </select>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Drilling Services</h3>
+                            <div class="form-group">
+                                <label for="drillingType">Drilling Type</label>
+                                <select id="drillingType" name="drillingType" required>
+                                    <option value="">Select Drilling Type</option>
+                                    <option value="symmetric">Symmetric Drilling - KES 130,000</option>
+                                    <option value="core">Core Drilling - KES 225,000</option>
+                                    <option value="geotechnical">Geo-Technical Drilling - KES 335,000</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="depth">Borehole Depth (meters)</label>
+                                <input type="number" id="depth" name="depth" min="1" required>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Pump Installation</h3>
+                            <div class="form-group">
+                                <label for="pumpType">Pump Type</label>
+                                <select id="pumpType" name="pumpType" required>
+                                    <option value="">Select Pump Type</option>
+                                    <option value="submersible">Submersible Electric Pump - KES 90,000</option>
+                                    <option value="solar">Solar Pump - KES 65,000</option>
+                                    <option value="hand">Hand Pump - KES 30,000</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="tankHeight">Tank Height Above Ground (meters)</label>
+                                <input type="number" id="tankHeight" name="tankHeight" min="0" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="tankCapacity">Tank Capacity (litres)</label>
+                                <input type="number" id="tankCapacity" name="tankCapacity" min="0" required>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Plumbing Services</h3>
+                            <div class="form-group">
+                                <label for="pipeType">Pipe Type</label>
+                                <select id="pipeType" name="pipeType">
+                                    <option value="">Select Pipe Type</option>
+                                    <option value="pvc">PVC</option>
+                                    <option value="hdpe">HDPE</option>
+                                    <option value="steel">Steel</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="pipeDiameter">Pipe Diameter (inches)</label>
+                                <input type="number" id="pipeDiameter" name="pipeDiameter" step="0.5" min="0">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="pipeLength">Pipe Length (meters)</label>
+                                <input type="number" id="pipeLength" name="pipeLength" min="0">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="outlets">Number of Outlets</label>
+                                <input type="number" id="outlets" name="outlets" min="0">
+                            </div>
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="submit" class="btn btn-primary">Register Service</button>
+                            <button type="reset" class="btn btn-secondary">Clear Form</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Services List Table -->
+                <div class="table-container">
+                    <h3>Registered Services</h3>
+                    <table id="servicesTable">
+                        <thead>
+                            <tr>
+                                <th>Client Name</th>
+                                <th>Service Type</th>
+                                <th>Status</th>
+                                <th>Start Date</th>
+                                <th>Total Cost</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Will be populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-container"></div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/service-registration.js"></script>
+</body>
+</html>
