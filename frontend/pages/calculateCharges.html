@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculate Charges - Uzima Borehole Drilling</title>
+    <title>Calculate Charges - Uzima Borehole Drilling System</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -15,103 +15,90 @@
         <div class="main-content">
             <div id="sidebar-container"></div>
             
-            <div class="content-area">
-                <div class="calculator-container">
-                    <h2>Service Charges Calculator</h2>
-                    
-                    <div class="calculator-form">
-                        <div class="form-section">
-                            <h3>Client Information</h3>
-                            <div class="form-group">
-                                <label for="selectClient">Select Client</label>
-                                <select id="selectClient" required>
-                                    <option value="">Choose a client</option>
-                                    <!-- Will be populated dynamically -->
-                                </select>
-                            </div>
-                            
-                            <div class="client-details" id="clientDetails">
-                                <p>Category: <span id="clientCategory">-</span></p>
-                                <p>Survey Fee: <span id="surveyFee">-</span></p>
-                                <p>Local Authority Fee: <span id="authorityFee">-</span></p>
-                            </div>
+            <div class="dashboard">
+                <h1>Calculate Service Charges</h1>
+                
+                <div class="form-container">
+                    <form id="chargesForm">
+                        <div class="form-group">
+                            <label for="clientId">Select Client</label>
+                            <select id="clientId" name="clientId" required>
+                                <!-- Will be populated dynamically -->
+                            </select>
                         </div>
-
-                        <div class="charges-breakdown">
-                            <h3>Charges Breakdown</h3>
-                            <div class="breakdown-item">
-                                <span>Survey Fees:</span>
-                                <span id="surveyFeeAmount">KES 0</span>
+                        
+                        <div class="form-group">
+                            <label for="serviceType">Service Type</label>
+                            <select id="serviceType" name="serviceType" required>
+                                <option value="">Select Service Type</option>
+                                <option value="borehole">Borehole Drilling</option>
+                                <option value="pump">Pump Installation</option>
+                                <option value="plumbing">Plumbing Works</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="depth">Depth (meters)</label>
+                            <input type="number" id="depth" name="depth" min="0" step="0.1" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="surveyFee">Survey Fee (KES)</label>
+                            <input type="number" id="surveyFee" name="surveyFee" min="0" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="localAuthorityFee">Local Authority Fee (KES)</label>
+                            <input type="number" id="localAuthorityFee" name="localAuthorityFee" min="0" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="additionalCosts">Additional Costs (KES)</label>
+                            <input type="number" id="additionalCosts" name="additionalCosts" min="0" value="0">
+                        </div>
+                        
+                        <div class="charges-summary" id="chargesSummary" style="display: none;">
+                            <h3>Charges Summary</h3>
+                            <div class="summary-item">
+                                <span>Survey Fee:</span>
+                                <span id="summarySurveyFee">KES 0</span>
                             </div>
-                            <div class="breakdown-item">
-                                <span>Local Authority Fees:</span>
-                                <span id="authorityFeeAmount">KES 0</span>
+                            <div class="summary-item">
+                                <span>Local Authority Fee:</span>
+                                <span id="summaryLocalAuthorityFee">KES 0</span>
                             </div>
-                            <div class="breakdown-item">
-                                <span>Drilling Charges:</span>
-                                <span id="drillingCharges">KES 0</span>
+                            <div class="summary-item">
+                                <span>Service Charge:</span>
+                                <span id="summaryServiceCharge">KES 0</span>
                             </div>
-                            <div class="breakdown-item">
-                                <span>Pump Installation:</span>
-                                <span id="pumpCharges">KES 0</span>
+                            <div class="summary-item">
+                                <span>Additional Costs:</span>
+                                <span id="summaryAdditionalCosts">KES 0</span>
                             </div>
-                            <div class="breakdown-item">
-                                <span>Depth & Height Charges:</span>
-                                <span id="depthCharges">KES 0</span>
-                            </div>
-                            <div class="breakdown-item">
-                                <span>Plumbing Charges:</span>
-                                <span id="plumbingCharges">KES 0</span>
-                            </div>
-                            <div class="breakdown-item">
-                                <span>Subtotal:</span>
-                                <span id="subtotal">KES 0</span>
-                            </div>
-                            <div class="breakdown-item">
+                            <div class="summary-item">
                                 <span>VAT (16%):</span>
-                                <span id="vat">KES 0</span>
+                                <span id="summaryVAT">KES 0</span>
                             </div>
-                            <div class="breakdown-item total">
+                            <div class="summary-item total">
                                 <span>Total Amount:</span>
-                                <span id="totalAmount">KES 0</span>
+                                <span id="summaryTotal">KES 0</span>
                             </div>
                         </div>
-
+                        
                         <div class="form-buttons">
-                            <button id="calculateBtn" class="btn btn-primary">Calculate Charges</button>
-                            <button id="generateInvoiceBtn" class="btn btn-secondary">Generate Invoice</button>
+                            <button type="submit" class="btn btn-primary">Calculate Charges</button>
+                            <button type="button" class="btn btn-secondary" id="resetForm">Reset</button>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Recent Calculations Table -->
-                <div class="table-container">
-                    <h3>Recent Calculations</h3>
-                    <table id="calculationsTable">
-                        <thead>
-                            <tr>
-                                <th>Client Name</th>
-                                <th>Date</th>
-                                <th>Services</th>
-                                <th>Subtotal</th>
-                                <th>VAT</th>
-                                <th>Total</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Will be populated dynamically -->
-                        </tbody>
-                    </table>
+                    </form>
                 </div>
             </div>
         </div>
-
+        
         <div id="footer-container"></div>
     </div>
 
     <script src="../js/main.js"></script>
     <script src="../js/utils.js"></script>
-    <script src="../js/calculate-charges.js"></script>
+    <script src="../js/calculateCharges.js"></script>
 </body>
 </html>
