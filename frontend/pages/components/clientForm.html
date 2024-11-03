@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<div class="form-component client-form">
+    <form id="clientForm" class="dynamic-form">
+        <div class="form-section">
+            <h3>Personal Information</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="clientName">Client Name *</label>
+                    <input type="text" id="clientName" name="clientName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="clientCategory">Category *</label>
+                    <select id="clientCategory" name="clientCategory" required>
+                        <option value="">Select Category</option>
+                        <option value="industrial">Industrial</option>
+                        <option value="commercial">Commercial</option>
+                        <option value="domestic">Domestic</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Physical Address *</label>
+                <textarea id="address" name="address" rows="2" required></textarea>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h3>Project Location</h3>
+            <div class="form-group">
+                <label for="projectLocation">Project Location Details *</label>
+                <textarea id="projectLocation" name="projectLocation" rows="3" required></textarea>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="county">County</label>
+                    <select id="county" name="county">
+                        <option value="">Select County</option>
+                        <!-- Counties will be loaded dynamically -->
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="constituency">Constituency</label>
+                    <select id="constituency" name="constituency">
+                        <option value="">Select Constituency</option>
+                        <!-- Constituencies will be loaded dynamically -->
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h3>Required Services</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="drillingService">Drilling Service *</label>
+                    <select id="drillingService" name="drillingService" required>
+                        <option value="">Select Drilling Type</option>
+                        <option value="symmetric">Symmetric Drilling</option>
+                        <option value="core">Core Drilling</option>
+                        <option value="geotechnical">Geo-Technical Drilling</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="pumpType">Pump Type *</label>
+                    <select id="pumpType" name="pumpType" required>
+                        <option value="">Select Pump Type</option>
+                        <option value="submersible">Submersible Electric Pump</option>
+                        <option value="solar">Solar Pump</option>
+                        <option value="hand">Hand Pump</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Additional Services</label>
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="additionalServices" value="plumbing">
+                        Plumbing Services
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="additionalServices" value="maintenance">
+                        Pump Maintenance
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="additionalServices" value="tankInstallation">
+                        Tank Installation
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save Client</button>
+            <button type="reset" class="btn btn-secondary">Clear Form</button>
+        </div>
+    </form>
+</div>

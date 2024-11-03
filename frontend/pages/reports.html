@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - Uzima Borehole Drilling System</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="wrapper">
+        <div id="header-container"></div>
+        
+        <div class="main-content">
+            <div id="sidebar-container"></div>
+            
+            <div class="dashboard">
+                <h1>Reports</h1>
+                
+                <div class="reports-container">
+                    <div class="reports-filters">
+                        <div class="form-group">
+                            <label for="reportType">Report Type</label>
+                            <select id="reportType">
+                                <option value="clientPayments">Client Payments</option>
+                                <option value="serviceRevenue">Service Revenue</option>
+                                <option value="plumbingCharges">Plumbing Charges</option>
+                                <option value="taxReport">Tax Report</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="dateRange">Date Range</label>
+                            <select id="dateRange">
+                                <option value="today">Today</option>
+                                <option value="thisWeek">This Week</option>
+                                <option value="thisMonth">This Month</option>
+                                <option value="thisYear">This Year</option>
+                                <option value="custom">Custom Range</option>
+                            </select>
+                        </div>
+                        
+                        <div class="custom-date-range" style="display: none;">
+                            <div class="form-group">
+                                <label for="startDate">Start Date</label>
+                                <input type="date" id="startDate">
+                            </div>
+                            <div class="form-group">
+                                <label for="endDate">End Date</label>
+                                <input type="date" id="endDate">
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-primary" id="generateReport">Generate Report</button>
+                    </div>
+                    
+                    <div class="report-summary">
+                        <div class="summary-cards">
+                            <div class="card">
+                                <i class="fas fa-money-bill-wave"></i>
+                                <h3>Total Revenue</h3>
+                                <p id="totalRevenueAmount">KES 0</p>
+                            </div>
+                            <div class="card">
+                                <i class="fas fa-percentage"></i>
+                                <h3>Total Tax</h3>
+                                <p id="totalTaxAmount">KES 0</p>
+                            </div>
+                            <div class="card">
+                                <i class="fas fa-tasks"></i>
+                                <h3>Total Services</h3>
+                                <p id="totalServicesCount">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table id="reportTable">
+                            <thead>
+                                <!-- Will be populated dynamically based on report type -->
+                            </thead>
+                            <tbody>
+                                <!-- Will be populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="report-actions">
+                        <button class="btn btn-secondary" id="exportPDF">
+                            <i class="fas fa-file-pdf"></i> Export PDF
+                        </button>
+                        <button class="btn btn-secondary" id="exportExcel">
+                            <i class="fas fa-file-excel"></i> Export Excel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="footer-container"></div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/reports.js"></script>
+</body>
+</html>
