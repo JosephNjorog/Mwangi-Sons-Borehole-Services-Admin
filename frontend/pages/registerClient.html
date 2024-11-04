@@ -7,15 +7,49 @@
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .sidebar {
+            background-color: white;
+            width: 16rem; /* 64 */
+            min-height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            overflow-y: auto;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .content {
+            margin-left: 16rem; /* Add margin to account for the sidebar width */
+            padding: 1rem;
+        }
+
+        .form-container, .table-container {
+            margin-top: 2rem;
+        }
+    </style>
 </head>
 <body>
     <div class="wrapper">
-        <div id="header-container"></div>
-        
-        <div class="main-content">
-            <div id="sidebar-container"></div>
-            
-            <div class="content-area">
+        <aside class="sidebar">
+            <h1 class="text-2xl font-bold mb-4 p-4">Uzima Borehole Drilling</h1>
+            <nav>
+                <ul>
+                    <li class="mb-2"><a href="index.html" class="text-blue-600 hover:underline p-4 block">Dashboard</a></li>
+                    <li class="mb-2"><a href="client_registration.html" class="text-blue-600 hover:underline p-4 block">Client Registration</a></li>
+                    <li class="mb-2"><a href="service_registration.html" class="text-blue-600 hover:underline p-4 block">Service Registration</a></li>
+                    <li class="mb-2"><a href="calculate_charges.html" class="text-blue-600 hover:underline p-4 block">Calculate Charges</a></li>
+                    <li class="mb-2"><a href="reports.html" class="text-blue-600 hover:underline p-4 block">Reports</a></li>
+                    <li class="mb-2"><a href="settings.html" class="text-blue-600 hover:underline p-4 block">Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="content">
+            <header class="mb-6">
+                <h2 class="text-3xl font-semibold">Client Registration</h2>
+            </header>
+            <main>
                 <div class="form-container">
                     <h2>Client Registration</h2>
                     <form id="clientRegistrationForm">
@@ -100,10 +134,13 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </main>
+            <footer class="mt-8">
+                <div class="container mx-auto text-center">
+                    <p class="text-gray-600">&copy; 2024 Uzima Borehole Drilling. All Rights Reserved.</p>
+                </div>
+            </footer>
         </div>
-
-        <div id="footer-container"></div>
     </div>
 
     <script src="../js/main.js"></script>
