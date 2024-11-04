@@ -4,14 +4,15 @@ const cors = require('cors');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
 const { errorHandler, notFound } = require('./middleware/errorMiddleware');
-const clientRoutes = require('./routes/clientRoutes');  // Make sure this path is correct
-const serviceRoutes = require('./routes/serviceRoutes');  // Add similar imports for your other routes
-const chargeRoutes = require('./routes/chargeRoutes');
-const reportRoutes = require('./routes/reportRoutes');
-// Load env vars
+const clientRoutes = require('./routes/clientRoutes');  // Ensure this path is correct
+const serviceRoutes = require('./routes/serviceRoutes');  // Import for service routes
+const chargeRoutes = require('./routes/chargeRoutes');    // Import for charge routes
+const reportRoutes = require('./routes/reportRoutes');    // Import for report routes
+
+// Load environment variables
 dotenv.config();
 
-// Connect to database
+// Connect to the database
 connectDB();
 
 const app = express();
@@ -22,17 +23,17 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 // Routes
-app.use('/api/clients', routes.clientRoutes);
-app.use('/api/services', routes.serviceRoutes);
-app.use('/api/charges', routes.chargeRoutes);
-app.use('/api/reports', routes.reportRoutes);
+app.use('/api/clients', clientRoutes);   // Correct usage
+app.use('/api/services', serviceRoutes);   // Correct usage
+app.use('/api/charges', chargeRoutes);     // Correct usage
+app.use('/api/reports', reportRoutes);     // Correct usage
 
-// Error handling
+// Error handling middleware
 app.use(notFound);
 app.use(errorHandler);
 
+// Start the server
 const PORT = process.env.PORT || 5000;
-
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });

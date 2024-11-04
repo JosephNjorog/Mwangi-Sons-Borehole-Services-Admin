@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
-const { Charge, Service } = require('../models');
+const Charge = require('../models/Charge');
+const Service = require('../models/Service');
 
 const chargeController = {
     // Calculate charges
@@ -33,8 +34,8 @@ const chargeController = {
 
     // Get charges for a service
     getServiceCharges: asyncHandler(async (req, res) => {
-        const charges = await Charge.findOne({ service: req.params.serviceId }).populate('service');
-        if (!charges) {
+        const charges = await Charge.find({ service: req.params.serviceId }).populate('service');
+        if (!charges || charges.length === 0) {
             res.status(404);
             throw new Error('Charges not found for this service');
         }
@@ -51,6 +52,12 @@ const chargeController = {
         }
 
         res.status(200).json(charge);
+    }),
+
+    // Get all charges (added this function as per your routes)
+    getAllCharges: asyncHandler(async (req, res) => {
+        const charges = await Charge.find().populate('service'); // Adjust based on your model relationships
+        res.status(200).json(charges);
     }),
 };
 

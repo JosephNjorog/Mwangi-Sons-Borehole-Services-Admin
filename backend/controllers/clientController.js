@@ -1,6 +1,6 @@
 // controllers/clientController.js
 const asyncHandler = require('express-async-handler');
-const { Client } = require('../models');
+const Client = require('../models/Client');
 
 const clientController = {
     // Get all clients
