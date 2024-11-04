@@ -7,60 +7,133 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Add Tailwind CSS for utility classes -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gray-100">
     <div class="wrapper">
-        <!-- Include Header -->
-        <div id="header-container"></div>
-
-        <!-- Main Content Area -->
-        <div class="main-content">
-            <!-- Include Sidebar -->
-            <div id="sidebar-container"></div>
-
-            <!-- Dashboard Content -->
-            <div class="dashboard">
-                <h1>Welcome to Uzima Borehole Drilling System.</h1>
-                
-                <!-- Dashboard Cards -->
-                <div class="dashboard-cards">
-                    <div class="card">
-                        <i class="fas fa-users"></i>
-                        <h3>Total Clients</h3>
-                        <p id="totalClients">0</p>
-                    </div>
-                    <div class="card">
-                        <i class="fas fa-tools"></i>
-                        <h3>Active Services</h3>
-                        <p id="activeServices">0</p>
-                    </div>
-                    <div class="card">
-                        <i class="fas fa-money-bill-wave"></i>
-                        <h3>Total Revenue</h3>
-                        <p id="totalRevenue">KES 0</p>
-                    </div>
-                    <div class="card">
-                        <i class="fas fa-project-diagram"></i>
-                        <h3>Ongoing Projects</h3>
-                        <p id="ongoingProjects">0</p>
-                    </div>
-                </div>
-
-                <!-- Recent Activities -->
-                <div class="recent-activities">
-                    <h2>Recent Activities</h2>
-                    <div class="activity-list" id="activityList">
-                        <!-- Activities will be populated dynamically -->
-                    </div>
+        <!-- Header -->
+        <header class="bg-blue-600 text-white p-4 fixed w-full top-0 z-50">
+            <div class="container mx-auto flex justify-between items-center">
+                <h1 class="text-2xl font-bold">Uzima Borehole Drilling</h1>
+                <div class="flex items-center space-x-4">
+                    <span id="username" class="hidden md:inline">Admin</span>
+                    <button id="notifications" class="relative">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge"></span>
+                    </button>
+                    <button id="userMenu">
+                        <i class="fas fa-user-circle text-2xl"></i>
+                    </button>
                 </div>
             </div>
-        </div>
+        </header>
 
-        <!-- Include Footer -->
-        <div id="footer-container"></div>
-    </div>
+        <!-- Main Content Area -->
+        <div class="main-content flex mt-16">
+            <!-- Sidebar -->
+            <aside class="sidebar bg-white w-64 min-h-screen fixed left-0 overflow-y-auto shadow-lg">
+                <nav class="mt-8">
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="index.html" class="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50">
+                                <i class="fas fa-home w-6"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="pages/registerClient.html" class="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50">
+                                <i class="fas fa-user-plus w-6"></i>
+                                <span>Client Registration</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="pages/registerService.html" class="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50">
+                                <i class="fas fa-tools w-6"></i>
+                                <span>Service Registration</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="pages/calculateCharges.html" class="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50">
+                                <i class="fas fa-calculator w-6"></i>
+                                <span>Calculate Charges</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="pages/reports.html" class="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50">
+                                <i class="fas fa-chart-bar w-6"></i>
+                                <span>Reports</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="pages/settings.html" class="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50">
+                                <i class="fas fa-cog w-6"></i>
+                                <span>Settings</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
 
-    <script src="js/main.js"></script>
-    <script src="js/utils.js"></script>
-</body>
-</html>
+            <!-- Dashboard Content -->
+            <main class="flex-1 ml-64 p-8">
+                <div class="dashboard">
+                    <h2 class="text-2xl font-bold mb-6">Dashboard Overview</h2>
+                    
+                    <!-- Dashboard Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                        <div class="bg-white rounded-lg shadow p-6">
+                            <div class="flex items-center">
+                                <i class="fas fa-users text-3xl text-blue-500"></i>
+                                <div class="ml-4">
+                                    <h3 class="text-gray-500 text-sm">Total Clients</h3>
+                                    <p id="totalClients" class="text-2xl font-bold">0</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow p-6">
+                            <div class="flex items-center">
+                                <i class="fas fa-tools text-3xl text-green-500"></i>
+                                <div class="ml-4">
+                                    <h3 class="text-gray-500 text-sm">Active Services</h3>
+                                    <p id="activeServices" class="text-2xl font-bold">0</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow p-6">
+                            <div class="flex items-center">
+                                <i class="fas fa-money-bill-wave text-3xl text-yellow-500"></i>
+                                <div class="ml-4">
+                                    <h3 class="text-gray-500 text-sm">Total Revenue</h3>
+                                    <p id="totalRevenue" class="text-2xl font-bold">KES 0</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow p-6">
+                            <div class="flex items-center">
+                                <i class="fas fa-project-diagram text-3xl text-purple-500"></i>
+                                <div class="ml-4">
+                                    <h3 class="text-gray-500 text-sm">Ongoing Projects</h3>
+                                    <p id="ongoingProjects" class="text-2xl font-bold">0</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activities -->
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <h3 class="text-xl font-bold mb-4">Recent Activities</h3>
+                        <div class="activity-list space-y-4" id="activityList">
+                            <!-- Activities will be populated dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white rounded-lg shadow p-6">
+                            <h3 class="text-xl font-bold mb-4">Quick Actions</h3>
+                            <div class="space-y-4">
+                                <button onclick="location.href='pages/registerClient.html'" class="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                                    New Client Registration
+                                </button>
+                                <button onclick="location
