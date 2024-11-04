@@ -32,7 +32,7 @@
         <!-- Main Content Area -->
         <div class="main-content flex mt-16">
             <!-- Sidebar -->
-            <aside class="sidebar bg-white w-64 min-h-screen fixed left-0 overflow-y-auto shadow-lg">
+            <aside class="sidebar bg-white w-64 min-h-screen fixed left-0 top-0 overflow-y-auto shadow-lg">
                 <nav class="mt-8">
                     <ul class="space-y-2">
                         <li>
@@ -136,4 +136,180 @@
                                 <button onclick="location.href='pages/registerClient.html'" class="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
                                     New Client Registration
                                 </button>
-                                <button onclick="location
+                                <button onclick="location.href='pages/registerService.html'" class="w-full bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                                    New Service Request
+                                </button>
+                                <button onclick="location.href='pages/calculateCharges.html'" class="w-full bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">
+                                    Calculate New Charges
+                                </button>
+                                <button onclick="location.href='pages/reports.html'" class="w-full bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">
+                                    Generate Report
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Recent Clients -->
+                        <div class="bg-white rounded-lg shadow p-6">
+                            <h3 class="text-xl font-bold mb-4">Recent Clients</h3>
+                            <div class="recent-clients-list space-y-4" id="recentClientsList">
+                                <!-- Will be populated dynamically -->
+                            </div>
+                            <button onclick="location.href='pages/registerClient.html'" class="mt-4 text-blue-600 hover:text-blue-800">
+                                View All Clients →
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Ongoing Projects and Revenue Charts -->
+                    <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Ongoing Projects -->
+                        <div class="bg-white rounded-lg shadow p-6">
+                            <h3 class="text-xl font-bold mb-4">Ongoing Projects</h3>
+                            <div class="ongoing-projects space-y-4" id="ongoingProjectsList">
+                                <!-- Will be populated dynamically -->
+                            </div>
+                        </div>
+
+                        <!-- Revenue Chart -->
+                        <div class="bg-white rounded-lg shadow p-6">
+                            <h3 class="text-xl font-bold mb-4">Revenue Overview</h3>
+                            <canvas id="revenueChart" height="200"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- System Notifications -->
+                    <div class="mt-8 bg-white rounded-lg shadow p-6">
+                        <h3 class="text-xl font-bold mb-4">System Notifications</h3>
+                        <div class="notifications-list space-y-4" id="notificationsList">
+                            <!-- Will be populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-white shadow mt-8 py-4">
+            <div class="container mx-auto text-center">
+                <p class="text-gray-600">&copy; 2024 Uzima Borehole Drilling. All Rights Reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <script>
+        // JavaScript code to fetch and update the dashboard metrics, recent activities, and charts
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fetch data from the server or local storage
+            const totalClients = 120; // Replace with actual data fetching logic
+            const activeServices = 85; // Replace with actual data fetching logic
+            const totalRevenue = 320000; // Replace with actual data fetching logic
+            const ongoingProjects = 15; // Replace with actual data fetching logic
+
+            document.getElementById('totalClients').textContent = totalClients;
+            document.getElementById('activeServices').textContent = activeServices;
+            document.getElementById('totalRevenue').textContent = 'KES ' + totalRevenue.toLocaleString();
+            document.getElementById('ongoingProjects').textContent = ongoingProjects;
+
+            // Update Recent Activities
+            const activities = [
+                'New client registered: John Doe',
+                'Service request completed: Borehole drilling at Site A',
+                'Payment received: KES 50,000',
+                'Project started: Borehole drilling at Site B',
+                'Client feedback received: Excellent service'
+            ];
+
+            const activityList = document.getElementById('activityList');
+            activities.forEach(activity => {
+                const activityItem = document.createElement('div');
+                activityItem.className = 'bg-gray-50 p-4 rounded shadow';
+                activityItem.textContent = activity;
+                activityList.appendChild(activityItem);
+            });
+
+            // Update Recent Clients
+            const recentClients = [
+                'John Doe',
+                'Jane Smith',
+                'Michael Johnson',
+                'Emily Davis',
+                'David Wilson'
+            ];
+
+            const recentClientsList = document.getElementById('recentClientsList');
+            recentClients.forEach(client => {
+                const clientItem = document.createElement('div');
+                clientItem.className = 'bg-gray-50 p-4 rounded shadow';
+                clientItem.textContent = client;
+                recentClientsList.appendChild(clientItem);
+            });
+
+            // Update Ongoing Projects
+            const ongoingProjectsList = [
+                'Borehole drilling at Site A',
+                'Borehole drilling at Site B',
+                'Water system installation at Site C',
+                'Well maintenance at Site D',
+                'Geological survey at Site E'
+            ];
+
+            const ongoingProjectsContainer = document.getElementById('ongoingProjectsList');
+            ongoingProjectsList.forEach(project => {
+                const projectItem = document.createElement('div');
+                projectItem.className = 'bg-gray-50 p-4 rounded shadow';
+                projectItem.textContent = project;
+                ongoingProjectsContainer.appendChild(projectItem);
+            });
+
+            // Render Revenue Chart
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            const revenueChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                    datasets: [{
+                        label: 'Revenue (KES)',
+                        data: [30000, 50000, 40000, 70000, 60000, 80000],
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Revenue Overview'
+                        }
+                    }
+                }
+            });
+
+            // Update System Notifications
+            const notifications = [
+                'System update completed',
+                'New user registered: Admin2',
+                'Database backup successful',
+                'Scheduled maintenance on 5th June',
+                'New feature added: Service History'
+            ];
+
+            const notificationsList = document.getElementById('notificationsList');
+            notifications.forEach(notification => {
+                const notificationItem = document.createElement('div');
+                notificationItem.className = 'bg-gray-50 p-4 rounded shadow';
+                notificationItem.textContent = notification;
+                notificationsList.appendChild(notificationItem);
+            });
+        });
+    </script>
+</body>
+</html>
