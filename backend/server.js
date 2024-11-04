@@ -4,8 +4,10 @@ const cors = require('cors');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
 const { errorHandler, notFound } = require('./middleware/errorMiddleware');
-const routes = require('./routes');
-
+const clientRoutes = require('./routes/clientRoutes');  // Make sure this path is correct
+const serviceRoutes = require('./routes/serviceRoutes');  // Add similar imports for your other routes
+const chargeRoutes = require('./routes/chargeRoutes');
+const reportRoutes = require('./routes/reportRoutes');
 // Load env vars
 dotenv.config();
 
