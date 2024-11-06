@@ -1,7 +1,7 @@
-## Project Plan for Uzima Borehole Drilling System
+## Project Plan for Mwangi&Sons Borehole Drilling System
 
 ### Overview
-This project aims to develop a comprehensive computerized database system for Uzima Company to manage their borehole drilling services, client registrations, service charges, and report generation. The system will help in maintaining client information, tracking services provided, computing charges, and generating detailed reports for better management and decision-making.
+This project aims to develop a comprehensive computerized database system for Mwangi&Sons Company to manage their borehole drilling services, client registrations, service charges, and report generation. The system will help in maintaining client information, tracking services provided, computing charges, and generating detailed reports for better management and decision-making.
 
 ### Project Structure
 1. **Frontend**
@@ -43,7 +43,7 @@ This project aims to develop a comprehensive computerized database system for Uz
 
 4. **Project Files Structure**
 ```
-uzima-borehole-drilling-system/
+MWangi&Sons-drilling-system/
 │
 ├── backend/
 │   ├── controllers/
